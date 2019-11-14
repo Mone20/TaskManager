@@ -28,6 +28,10 @@ public class TaskLog implements TaskInterface {
         this.TaskList=tl.TaskList;
         
     }
+    public ArrayList<TaskNode> getTaskList()
+    {
+        return this.TaskList;
+    }
     @Override
     public void createTask(String name,String description,Date date,String number)
     {
