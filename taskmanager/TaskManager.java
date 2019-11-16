@@ -5,7 +5,10 @@
  */
 package taskmanager;
 
+import userview.UserInterface;
+
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  *
@@ -16,7 +19,7 @@ public class TaskManager {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, ParseException {
         // TODO code application logic here
         UserInterface TaskManager=new UserInterface();
         TaskManager.mainUserInterface();
