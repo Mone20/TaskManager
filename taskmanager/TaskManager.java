@@ -5,7 +5,6 @@
  */
 package taskmanager;
 
-import userview.UserInterface;
 import java.io.IOException;
 
 /**
