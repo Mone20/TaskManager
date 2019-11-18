@@ -7,6 +7,7 @@ package taskmanager;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -15,9 +16,9 @@ import java.util.Date;
 public class TaskNode implements Serializable {
     private String TaskName;
     private String TaskDescription;
-    private Date TaskDate;
+    private GregorianCalendar TaskDate;
     private String phoneNumber;
-    public TaskNode(String name,String description,Date date,String number)
+    public TaskNode(String name,String description,GregorianCalendar date,String number)
     {
         TaskName=name;
         TaskDescription=description;
@@ -32,7 +33,7 @@ public class TaskNode implements Serializable {
     {
         return this.TaskDescription;
     }
-     public Date getTaskDate()
+     public GregorianCalendar getTaskDate()
      {
          return this.TaskDate;
      }
@@ -48,12 +49,9 @@ public class TaskNode implements Serializable {
      {
          this.TaskDescription=description;
      }
-     public void setTaskName(Date date)
+     public void setTaskDate(GregorianCalendar date)
      {
          this.TaskDate=date;
      }
-     public void setPhoneNumber(String number)
-     {
-         this.phoneNumber=number;
-     }
+     public void setPhoneNumber(String number) { this.phoneNumber=number; }
 }

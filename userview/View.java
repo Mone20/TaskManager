@@ -1,5 +1,6 @@
 package userview;
 
+import sun.java2d.windows.GDIRenderer;
 import taskmanager.TaskLog;
 import taskmanager.TaskNode;
 
@@ -9,15 +10,17 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class View {
 
     public void viewForNewTask(TaskLog tmp) throws IOException, ParseException {
         Scanner in = new Scanner(System.in);
+        TaskNode node = null;
         String taskName;
         String taskDescription;
-        Date taskDate = null;
+        GregorianCalendar taskDate = null;
         int yers;
         int month;
         int day;
@@ -31,29 +34,27 @@ public class View {
 
         System.out.print(" | Описание: ");
         taskDescription = in.nextLine(); // надо
-
-        System.out.print(" | Год: ");
+        //проверки на ввод даты?
+        System.out.println(" | Год:");
         yers = in.nextInt();
-        taskDate.setYear(yers);
-        System.out.print(" | Месяц: ");
+        System.out.println(" | Месяц:");
         month = in.nextInt();
-        taskDate.setMonth(month);
-        System.out.print(" | День: ");
-        day = in.nextInt(); //хз с днём нет
-        System.out.print(" | Час: ");
+        System.out.println(" | День:");
+        day = in.nextInt();
+        System.out.println(" | Часы:");
         hours = in.nextInt();
-        taskDate.setHours(hours);
-        System.out.print(" | Минуты: ");
+        System.out.println(" | Минуты:");
         minutes = in.nextInt();
-        taskDate.setMinutes(minutes);
-        System.out.print(" | Дата: ");
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        //taskDate = sdf.parse(br.readLine());
-        System.out.println(taskDate);
-        System.out.print(" | Контакт:");
+        taskDate.set(yers,month,day,hours,minutes);
+        node.setTaskDate(taskDate);
+
+        System.out.println(" |Номер телефона: ");
         phoneNumber = in.nextLine();
-        tmp.createTask(taskName, taskDescription, taskDate, phoneNumber);
+
+        node.setTaskName(taskName);
+        node.setTaskDescription(taskDescription);
+        node.setPhoneNumber(phoneNumber);
+        tmp.createTask(node);
         //в файл записать
         tmp.exit();
     }

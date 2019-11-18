@@ -1,61 +1,79 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package taskmanager;
+       * To change this license header, choose License Headers in Project Properties.
+        * To change this template file, choose Tools | Templates
+        * and open the template in the editor.
+        */
+        package taskmanager;
 
-import taskinterface.TaskInterface;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Date;
+        import java.io.BufferedInputStream;
+        import java.io.File;
+        import java.io.FileInputStream;
+        import java.io.FileOutputStream;
+        import java.io.IOException;
+        import java.io.ObjectInputStream;
+        import java.io.ObjectOutputStream;
+        import java.util.ArrayList;
+        import java.util.Date;
+        import java.util.Scanner;
 
 /**
  *
  * @author Rodion
  */
-public class TaskLog implements TaskInterface {
+public class TaskLog  {
     public static String path="myfile";
-    private ArrayList <taskmanager.TaskNode> TaskList;
-    public TaskLog() throws IOException, ClassNotFoundException 
-    {
-        FileInputStream in=new FileInputStream(path);
-        ObjectInputStream objectIn = new ObjectInputStream(in);
-        TaskLog tl=(TaskLog)objectIn.readObject();
-        this.TaskList=tl.TaskList;
-        
+    private ArrayList <TaskNode> TaskList;
+    public TaskLog() throws IOException, ClassNotFoundException {
+        File f = new File(path);
+        if (f.exists()) {
+            if (f.length() != 0) {
+                FileInputStream in = new FileInputStream(f);
+                ObjectInputStream objectIn = new ObjectInputStream(in);
+                TaskLog tl = (TaskLog) objectIn.readObject();
+                this.TaskList = tl.TaskList;
+            } else {
+                this.TaskList = new ArrayList<TaskNode>();
+            }
+        } else {
+            if (f.createNewFile()) {
+                this.TaskList = new ArrayList<TaskNode>();
+            } else {
+                System.out.printf("Error");
+            }
+        }
     }
-    public ArrayList<taskmanager.TaskNode> getTaskList()
+    public ArrayList<TaskNode> getTaskList()
     {
         return this.TaskList;
     }
-    @Override
-    public void createTask(String name,String description,Date date,String number)
+    public void createTask(TaskNode task)
     {
-        taskmanager.TaskNode task=new taskmanager.TaskNode(name,description,date,number);
         this.TaskList.add(task);
     }
-    @Override
-    public void deleteTask(taskmanager.TaskNode object) throws IllegalArgumentException
+    public void deleteTask(TaskNode object) throws IllegalArgumentException
     {
         this.TaskList.remove(object);
-        
     }
-    @Override
-     public void exit() throws IOException {
-         try{
-        FileOutputStream out= new FileOutputStream(path);      
-        ObjectOutputStream objectOut = new ObjectOutputStream(out);
-        objectOut.writeObject(this);
-        out.flush();
-         }catch(IOException ioe){
-          ioe.printStackTrace();}
+    public void exit() throws IOException {
+        boolean flag = false;
+        try {
+            while (!flag) {
+                File f = new File(path);
+                if (f.exists()) {
+                    flag = true;
+                    FileOutputStream out = new FileOutputStream(path);
+                    ObjectOutputStream objectOut = new ObjectOutputStream(out);
+                    objectOut.writeObject(this);
+                    out.flush();
+                } else {
+                    System.out.println("inputfile dosnt exist");
+                    System.out.println("enter path");
+                    Scanner s = new Scanner(System.in);
+                    path = s.nextLine();
+                }
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
-//почему-то нет этого метода.....
-   // public int size()
 }
