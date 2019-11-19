@@ -18,7 +18,7 @@ public class TaskNode implements Serializable {
     private String TaskDescription;
     private GregorianCalendar TaskDate;
     private String phoneNumber;
-    public TaskNode(String name,String description,GregorianCalendar date,String number)
+    public TaskNode(String name, String description, GregorianCalendar date, String number)
     {
         TaskName=name;
         TaskDescription=description;

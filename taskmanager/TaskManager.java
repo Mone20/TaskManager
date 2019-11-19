@@ -8,13 +8,14 @@ package taskmanager;
 import userview.UserInterface;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 
 /**
  *
  * @author Rodion
  */
-public class TaskManager {
+public class TaskManager implements Serializable {
 
     /**
      * @param args the command line arguments

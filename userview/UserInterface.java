@@ -3,10 +3,16 @@ package userview;
 import taskmanager.TaskLog;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class UserInterface extends View {
+/**
+ *
+ * @author Ilya
+ */
+
+public class UserInterface extends View implements Serializable {
     TaskLog list;
 
     public UserInterface () throws IOException, ClassNotFoundException {
@@ -14,7 +20,7 @@ public class UserInterface extends View {
     }
 
     public void mainUserInterface() throws IOException, ParseException {
-        System.out.println("TASKMANAGER 0.1");
+        System.out.println("TASKMANAGER 0.11");
         Scanner in = new Scanner(System.in);
         boolean exit = false;
         int choice = -1;
@@ -22,7 +28,7 @@ public class UserInterface extends View {
             //вывод ближайшего события
 
             System.out.println("1-Новое событие;");
-            System.out.println("2-Просмотр всех событий;"); // будет выводится снизу
+            System.out.println("2-Просмотр всех событий;");
             System.out.println("3-Удалить событие;");
 
             System.out.println("0-Закрыто менеджер задач.");
