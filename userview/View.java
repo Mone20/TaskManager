@@ -1,4 +1,4 @@
-package userview;
+package taskmanager;
 
 import taskmanager.TaskLog;
 import taskmanager.TaskNode;
@@ -15,8 +15,11 @@ import java.util.Scanner;
  */
 
 public class View implements Serializable {
-
-    public void viewForNewTask(TaskLog tmp) throws IOException, ParseException {
+public View()
+{
+    
+}
+    public TaskNode viewForNewTask() throws IOException, ParseException {
         Scanner in = new Scanner(System.in);
         String taskName;
         String taskDescription;
@@ -53,10 +56,10 @@ public class View implements Serializable {
 
         GregorianCalendar taskDate= new GregorianCalendar(years,month,day,hours,minutes);
 
-        TaskNode node = new TaskNode(taskName,taskDescription,taskDate,phoneNumber);
-        tmp.createTask(node);
+        return new TaskNode(taskName,taskDescription,taskDate,phoneNumber);
+       
         //в файл записать
-        tmp.exit();
+      
     }
 
     public void viewAllTasks(TaskLog tmp) {
@@ -72,12 +75,12 @@ public class View implements Serializable {
 
         }
     }
-    public void viewForDelete (TaskLog tmp) {
+    public int viewForDelete () {
         int number;
         System.out.println(" | Введите что удалить (номер?)");
         Scanner in = new Scanner(System.in);
         number = in.nextInt();
-        tmp.deleteTask(tmp.getTaskList().get(number));
+        return number;
     }
 }
 
