@@ -25,6 +25,7 @@ public class UserInterface  implements Serializable {
         boolean exit = false;
         int choice = -1;
         while (!exit){
+            new TimeNotification().onTimeNotification();
             //вывод ближайшего события
             TaskController tc=new TaskController();
             System.out.println("1-Новое событие;");
