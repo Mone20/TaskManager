@@ -12,6 +12,7 @@
         import java.io.IOException;
         import java.io.ObjectInputStream;
         import java.io.ObjectOutputStream;
+import java.io.Serializable;
         import java.util.ArrayList;
         import java.util.Date;
         import java.util.Scanner;
@@ -20,8 +21,8 @@
  *
  * @author Rodion
  */
-public class TaskLog  {
-    public static String path="myfile";
+public class TaskLog implements Serializable  {
+    public static String path="myfile1";
     private ArrayList <TaskNode> TaskList;
     public TaskLog() throws IOException, ClassNotFoundException {
         File f = new File(path);
@@ -59,18 +60,34 @@ public class TaskLog  {
         try {
             while (!flag) {
                 File f = new File(path);
-                if (f.exists()) {
+                if (!f.exists()) 
+                    {
+                         if(!f.createNewFile())
+                         {
+                          System.out.println("write error");
+                          System.out.println("enter path");
+                          Scanner s = new Scanner(System.in);
+                          path = s.nextLine();
+                         }
+                    }
+                else
+                {
+                    f.delete();
+                    f.createNewFile();
                     flag = true;
                     FileOutputStream out = new FileOutputStream(path);
                     ObjectOutputStream objectOut = new ObjectOutputStream(out);
                     objectOut.writeObject(this);
                     out.flush();
-                } else {
-                    System.out.println("inputfile dosnt exist");
-                    System.out.println("enter path");
-                    Scanner s = new Scanner(System.in);
-                    path = s.nextLine();
+                   
+//                   else{
+//                         System.out.println("write error");
+//                          System.out.println("enter path");
+//                          Scanner s = new Scanner(System.in);
+//                          path = s.nextLine();
+//                   }
                 }
+               
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
