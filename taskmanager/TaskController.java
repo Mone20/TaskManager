@@ -51,5 +51,9 @@ public TaskLog getLog()
             ui.viewAllTasks(tl);
             
     }
+    public void notification() throws IOException, ClassNotFoundException, ParseException
+    {
+        new TimeNotification(tl).onTimeNotification();
+    }
    
 }
