@@ -24,10 +24,10 @@ public class UserInterface  implements Serializable {
         Scanner in = new Scanner(System.in);
         boolean exit = false;
         int choice = -1;
+        TaskController tc=new TaskController();
         while (!exit){
-            new TimeNotification().onTimeNotification();
-            //вывод ближайшего события
-            TaskController tc=new TaskController();
+            
+            tc.notification();
             System.out.println("1-Новое событие;");
             System.out.println("2-Просмотр всех событий;");
             System.out.println("3-Удалить событие;");
