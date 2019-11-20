@@ -1,16 +1,12 @@
-package com.company.taskmanager;
+package taskmanager;
 
-import com.company.*;
-import com.company.taskinterface.TaskInterface;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class TimeNotification  {
-    private TaskLog temp =new TaskLog();
+public class TimeNotification {
+    private TaskLog temp = new TaskLog();
 
     public TimeNotification() throws IOException, ClassNotFoundException {
     }
@@ -23,7 +19,8 @@ public class TimeNotification  {
             tempCal = temp.getTaskList().get(i).getTaskDate();
             tempCal.add(Calendar.MONTH, -1);
             Date tempDate = new Date();
-            if (tempCal.getTimeInMillis()>System.currentTimeMillis()) {
+            if (tempCal.getTimeInMillis() > System.currentTimeMillis() && !temp.getTaskList().get(i).getChanged() ) {
+                temp.getTaskList().get(i).setChanged(true);
                 timer.schedule(new timeTask(), tempCal.getTime());
             }
         }
