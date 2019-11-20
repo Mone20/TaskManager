@@ -6,9 +6,10 @@ import java.text.ParseException;
 import java.util.*;
 
 public class TimeNotification {
-    private TaskLog temp = new TaskLog();
+    private TaskLog temp;
 
-    public TimeNotification() throws IOException, ClassNotFoundException {
+    public TimeNotification(TaskLog tl) throws IOException, ClassNotFoundException {
+        temp=tl;
     }
 
 
