@@ -1,37 +1,39 @@
-package taskmanager; 
+package com.company.taskmanager;
 
-import taskinterface.TaskInterface;
+import com.company.*;
+import com.company.taskinterface.TaskInterface;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
-public class TimeNotification implements TaskInterface {
+public class TimeNotification  {
+    private TaskLog temp =new TaskLog();
 
-@Override 
-public void createTask(String name, String description, Date date, String number) { 
+    public TimeNotification() throws IOException, ClassNotFoundException {
+    }
 
-}
 
-@Override
-public void deleteTask(taskmanager.TaskNode object) {
+    public void onTimeNotification() throws ParseException {
+        Timer timer = new Timer();
+        for (int i = 0; i < temp.getTaskList().size(); i++) {
+            GregorianCalendar tempCal = new GregorianCalendar();
+            tempCal = temp.getTaskList().get(i).getTaskDate();
+            tempCal.add(Calendar.MONTH, -1);
+            Date tempDate = new Date();
+            if (tempCal.getTimeInMillis()>System.currentTimeMillis()) {
+                timer.schedule(new timeTask(), tempCal.getTime());
+            }
+        }
+    }
 
-} 
 
-@Override 
-public void exit() throws IOException { 
+    private static class timeTask extends TimerTask {
+        public void run() {
+            System.out.println("Произошла нотификация");
+        }
+    }
 
-} 
-
-public void timeNotificating() throws IOException, ClassNotFoundException { 
-taskmanager.TaskLog temp = new taskmanager.TaskLog();
-    long minTime = Long.MAX_VALUE;
-    GregorianCalendar curr = new GregorianCalendar();
-    for (int i = 0; i < temp.getTaskList().size(); i++)
-        if (temp.getTaskList().get(i).getTaskDate().getTime().getTime() - curr.getTime().getTime() < minTime && curr.after(temp.getTaskList().get(i).getTaskDate()))
-        minTime = temp.getTaskList().get(i).getTaskDate().getTime().getTime() - curr.getTime().getTime();
-    if (minTime<Long.MAX_VALUE)
-    System.out.println("Произошла нотификация. ");
-
-} 
 }
