@@ -25,8 +25,6 @@ public class TaskManager implements Serializable {
         // TODO code application logic here
         UserInterface TaskManager=new UserInterface();
         TaskManager.mainUserInterface();
-        TimeNotification tN = new TimeNotification();
-        tN.onTimeNotification();
-}
+        }
     
 }
