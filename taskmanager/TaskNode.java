@@ -18,12 +18,23 @@ public class TaskNode implements Serializable {
     private String TaskDescription;
     private GregorianCalendar TaskDate;
     private String phoneNumber;
-    public TaskNode(String name, String description, GregorianCalendar date, String number)
+    private boolean changed;
+    public TaskNode(String name,String description,GregorianCalendar date,String number)
     {
         TaskName=name;
         TaskDescription=description;
         TaskDate=date;
         phoneNumber=number;
+        changed=false;
+    }
+    public boolean getChanged()
+    {
+        return this.changed;
+    }
+    public void setChanged(boolean c)
+    {
+        this.changed=c;
+        
     }
     public String getTaskName()
     {
@@ -53,5 +64,8 @@ public class TaskNode implements Serializable {
      {
          this.TaskDate=date;
      }
-     public void setPhoneNumber(String number) { this.phoneNumber=number; }
+     public void setPhoneNumber(String number)
+     {
+         this.phoneNumber=number;
+     }
 }
