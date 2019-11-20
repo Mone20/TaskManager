@@ -3,55 +3,68 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package taskmanager;
+package com.company.taskmanager;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- *
  * @author Rodion
  */
 public class TaskNode implements Serializable {
     private String TaskName;
+
+
     private String TaskDescription;
     private GregorianCalendar TaskDate;
     private String phoneNumber;
-    public TaskNode(String name, String description, GregorianCalendar date, String number)
-    {
-        TaskName=name;
-        TaskDescription=description;
-        TaskDate=date;
-        phoneNumber=number;
+    private Boolean changed;
+
+    public TaskNode(String name, String description, GregorianCalendar date, String number) {
+        TaskName = name;
+        TaskDescription = description;
+        TaskDate = date;
+        phoneNumber = number;
+        changed = false;
     }
-    public String getTaskName()
-    {
+
+    public String getTaskName() {
         return this.TaskName;
     }
-     public String getTaskDescription()
-    {
+
+    public String getTaskDescription() {
         return this.TaskDescription;
     }
-     public GregorianCalendar getTaskDate()
-     {
-         return this.TaskDate;
-     }
-     public String getPhoneNumber()
-    {
+
+    public GregorianCalendar getTaskDate() {
+        return this.TaskDate;
+    }
+
+    public String getPhoneNumber() {
         return this.phoneNumber;
     }
-     public void setTaskName(String name)
-     {
-         this.TaskName=name;
-     }
-     public void setTaskDescription(String description)
-     {
-         this.TaskDescription=description;
-     }
-     public void setTaskDate(GregorianCalendar date)
-     {
-         this.TaskDate=date;
-     }
-     public void setPhoneNumber(String number) { this.phoneNumber=number; }
+
+    public void setTaskName(String name) {
+        this.TaskName = name;
+    }
+
+    public void setTaskDescription(String description) {
+        this.TaskDescription = description;
+    }
+
+    public void setTaskDate(GregorianCalendar date) {
+        this.TaskDate = date;
+    }
+
+    public void setPhoneNumber(String number) {
+        this.phoneNumber = number;
+    }
+
+    public Boolean getChanged() {
+        return changed;
+    }
+
+    public void setChanged(Boolean changed) {
+        this.changed = changed;
+    }
 }
