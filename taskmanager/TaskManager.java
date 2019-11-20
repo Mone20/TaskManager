@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package taskmanager;
+package com.company.taskmanager;
 
-import userview.UserInterface;
+import com.company.userview.UserInterface;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Time;
 import java.text.ParseException;
 
 /**
@@ -24,6 +25,8 @@ public class TaskManager implements Serializable {
         // TODO code application logic here
         UserInterface TaskManager=new UserInterface();
         TaskManager.mainUserInterface();
+        TimeNotification tN = new TimeNotification();
+        tN.onTimeNotification();
 }
     
 }
