@@ -6,41 +6,43 @@ import java.text.ParseException;
 import java.util.*;
 
 public class TimeNotification {
-    private TaskLog tempLog = new TaskLog();
+    private TaskLog temp;
 
     public TimeNotification(TaskLog tl) throws IOException, ClassNotFoundException {
-        tempLog = tl;
+        temp=tl;
     }
 
-    public TimeNotification() throws IOException, ClassNotFoundException {
-    }
 
     public void onTimeNotification() throws ParseException {
         Timer timer = new Timer();
-        for (int i = 0; i < tempLog.getTaskList().size(); i++) {
+        for (int i = 0; i < temp.getTaskList().size(); i++) {
             GregorianCalendar tempCal = new GregorianCalendar();
-            tempCal = tempLog.getTaskList().get(i).getTaskDate();
+            tempCal = temp.getTaskList().get(i).getTaskDate();
             tempCal.add(Calendar.MONTH, -1);
             Date tempDate = new Date();
-            if (tempCal.getTimeInMillis() > System.currentTimeMillis() && !tempLog.getTaskList().get(i).getChanged()) {
-                tempLog.getTaskList().get(i).setChanged(true);
-                TimeTask task = new TimeTask(tempLog.getTaskList().get(i));
-                timer.schedule(task, tempCal.getTime());
+            if (tempCal.getTimeInMillis() > System.currentTimeMillis() && !temp.getTaskList().get(i).getChanged() ) {
+                temp.getTaskList().get(i).setChanged(true);
+                timer.schedule(new timeTask(temp.getTaskList().get(i)), tempCal.getTime());
+                
             }
         }
     }
 
-    private class TimeTask extends TimerTask {
-        private TaskNode tempNode;
 
-        public TimeTask(TaskNode tempNode) {
-            this.tempNode = tempNode;
+    private class timeTask extends TimerTask {
+        TaskNode notificationTask;
+        timeTask(TaskNode tn)
+        {
+            this.notificationTask=tn;
         }
-
+        @Override
         public void run() {
-            System.out.println("Пришло время: " + tempNode.getTaskName() + "\nНадо сделать: " + tempNode.getTaskDescription());
+            System.out.println("TASK NOTIFICATION");
+            System.out.println("НАЗВАНИЕ:"+this.notificationTask.getTaskName());
+             System.out.println("ОПИСАНИЕ:"+this.notificationTask.getTaskDescription());
+              System.out.println("НОМЕР:"+this.notificationTask.getPhoneNumber());
+               
         }
     }
-
 
 }

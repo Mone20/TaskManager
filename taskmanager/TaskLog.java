@@ -5,16 +5,14 @@
         */
         package taskmanager;
 
-        import java.io.BufferedInputStream;
         import java.io.File;
         import java.io.FileInputStream;
         import java.io.FileOutputStream;
         import java.io.IOException;
         import java.io.ObjectInputStream;
         import java.io.ObjectOutputStream;
-import java.io.Serializable;
+        import java.io.Serializable;
         import java.util.ArrayList;
-        import java.util.Date;
         import java.util.Scanner;
 
 /**
@@ -22,7 +20,7 @@ import java.io.Serializable;
  * @author Rodion
  */
 public class TaskLog implements Serializable  {
-    public static String path="myfile1";
+    public static String path="myfile11";
     private ArrayList <TaskNode> TaskList;
     public TaskLog() throws IOException, ClassNotFoundException {
         File f = new File(path);
@@ -55,7 +53,7 @@ public class TaskLog implements Serializable  {
     {
         this.TaskList.remove(object);
     }
-    public void exit() throws IOException {
+    public void saveAll() throws IOException {
         boolean flag = false;
         try {
             while (!flag) {
@@ -64,10 +62,21 @@ public class TaskLog implements Serializable  {
                     {
                          if(!f.createNewFile())
                          {
-                          System.out.println("write error");
-                          System.out.println("enter path");
+                            
                           Scanner s = new Scanner(System.in);
+                          System.out.println("write error");
+                          System.out.println("enter another path - 1,exit - 0");
+                          int change=s.nextInt();
+                          if(change==0)
+                          {
+                          System.out.println("enter path: ");
                           path = s.nextLine();
+                          }
+                          if(change==1)
+                          {
+                              System.exit(0);
+                          }
+                             
                          }
                     }
                 else
@@ -80,12 +89,7 @@ public class TaskLog implements Serializable  {
                     objectOut.writeObject(this);
                     out.flush();
                    
-//                   else{
-//                         System.out.println("write error");
-//                          System.out.println("enter path");
-//                          Scanner s = new Scanner(System.in);
-//                          path = s.nextLine();
-//                   }
+
                 }
                
             }

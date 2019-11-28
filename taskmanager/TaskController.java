@@ -24,13 +24,18 @@ public TaskLog getLog()
 {
     return tl;
 }
+public void mainView()
+{
+    this.ui.mainView();
+            
+}
     public  void createTask() throws IOException, ParseException
     {
         TaskNode newTask=ui.viewForNewTask();
         if(!newTask.getTaskName().isEmpty()&&!newTask.getTaskDescription().isEmpty()&&!newTask.getPhoneNumber().isEmpty())
         {
         tl.createTask(newTask);
-        tl.exit();
+        tl.saveAll();
         }
         
     }
@@ -40,7 +45,7 @@ public TaskLog getLog()
         if(tl.getTaskList().size()>index&&index>=0)
         {
             this.tl.deleteTask(tl.getTaskList().get(index));
-            tl.exit();
+            tl.saveAll();
         }
         else
             System.out.println("task dosnt exist");
@@ -55,5 +60,8 @@ public TaskLog getLog()
     {
         new TimeNotification(tl).onTimeNotification();
     }
-   
+   public void clear()
+   {
+       ui.clear();
+   }
 }
