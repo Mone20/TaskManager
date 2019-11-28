@@ -19,43 +19,45 @@ public class UserInterface  implements Serializable {
        
     }
 
-    public void mainUserInterface() throws IOException, ParseException, ClassNotFoundException {
+    public void mainUserInterface() throws IOException, ParseException, ClassNotFoundException, InterruptedException {
         System.out.println("TASKMANAGER 0.11");
         Scanner in = new Scanner(System.in);
-        boolean exit = false;
+       
         int choice = -1;
-        while (!exit){
-            new TimeNotification().onTimeNotification();
-            //вывод ближайшего события
-            TaskController tc=new TaskController();
-            System.out.println("1-Новое событие;");
-            System.out.println("2-Просмотр всех событий;");
-            System.out.println("3-Удалить событие;");
-            System.out.println("0-Закрыто менеджер задач.");
+        TaskController tc=new TaskController();
+        
+        while (true){
+            
+            tc.notification();
+            tc.mainView();
             choice = in.nextInt();
             switch (choice){
                 case 1:{
+                   tc.clear();
                    tc.createTask(); 
-                    //вывод создания нового события
+                 
                     break;
                 }
                 case 2:{
                     tc.viewAll();
-                    //вывод всех задач
+                   
                     break;
                 }
                 case 3:{
+                    tc.clear();
                     tc.deleteTask();
-                    //вывод для удаления
+                   
                     break;
                 }
                 case 0: 
                 {
-                    tc.getLog().exit();
-                    exit = true;
+                    tc.getLog().saveAll();
+                    System.exit(0);
                 
                 }
             }
+           
+        
         }
     }
 }

@@ -61,7 +61,20 @@ public View()
         //в файл записать
       
     }
-
+    public void clear()
+{
+    for(int i=0;i<30;i++)
+            {
+                System.out.println();
+            }
+}
+public void mainView()
+{
+            System.out.println("1-Новое событие;");
+            System.out.println("2-Просмотр всех событий;");
+            System.out.println("3-Удалить событие;");
+            System.out.println("0-Закрыто менеджер задач.");
+}
     public void viewAllTasks(TaskLog tmp) {
         for (int i = 0; i < tmp.getTaskList().size(); i++){
             System.out.println( "["+i+"] | TASK |");
