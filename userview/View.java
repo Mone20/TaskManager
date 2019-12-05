@@ -75,15 +75,15 @@ public void mainView()
             System.out.println("3-Удалить событие;");
             System.out.println("0-Закрыто менеджер задач.");
 }
-    public void viewAllTasks(TaskLog tmp) {
-        for (int i = 0; i < tmp.getTaskList().size(); i++){
+    public void viewAllTasks(Log<TaskNode> tmp) {
+        for (int i = 0; i < tmp.size(); i++){
             System.out.println( "["+i+"] | TASK |");
-            System.out.println("   |Событие: " + tmp.getTaskList().get(i).getTaskName() + ";");
-            System.out.println("   |Описание: " + tmp.getTaskList().get(i).getTaskDescription() + ";");
-            System.out.println("   |Дата: " + tmp.getTaskList().get(i).getTaskDate().get(Calendar.DAY_OF_MONTH) + "." +
-                     tmp.getTaskList().get(i).getTaskDate().get(Calendar.MONTH) +"." + tmp.getTaskList().get(i).getTaskDate().get(Calendar.YEAR) +";");
-            System.out.println("   |Время: " + tmp.getTaskList().get(i).getTaskDate().get(Calendar.HOUR)+":"+ tmp.getTaskList().get(i).getTaskDate().get(Calendar.MINUTE) + ";");
-            System.out.println("   |Контакты: " + tmp.getTaskList().get(i).getPhoneNumber() + ".");
+            System.out.println("   |Событие: " + tmp.get(i).getTaskName() + ";");
+            System.out.println("   |Описание: " + tmp.get(i).getTaskDescription() + ";");
+            System.out.println("   |Дата: " + tmp.get(i).getTaskDate().get(Calendar.DAY_OF_MONTH) + "." +
+                     tmp.get(i).getTaskDate().get(Calendar.MONTH) +"." + tmp.get(i).getTaskDate().get(Calendar.YEAR) +";");
+            System.out.println("   |Время: " + tmp.get(i).getTaskDate().get(Calendar.HOUR)+":"+ tmp.get(i).getTaskDate().get(Calendar.MINUTE) + ";");
+            System.out.println("   |Контакты: " + tmp.get(i).getPhoneNumber() + ".");
             System.out.println("   |-------------------------------");
 
         }
