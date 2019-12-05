@@ -19,8 +19,8 @@
  *
  * @author Rodion
  */
-public class TaskLog implements Serializable  {
-    public static String path="myfile11";
+public class TaskLog implements Serializable,Log<TaskNode>{
+    public static String path="file";
     private ArrayList <TaskNode> TaskList;
     public TaskLog() throws IOException, ClassNotFoundException {
         File f = new File(path);
@@ -31,28 +31,28 @@ public class TaskLog implements Serializable  {
                 TaskLog tl = (TaskLog) objectIn.readObject();
                 this.TaskList = tl.TaskList;
             } else {
-                this.TaskList = new ArrayList<TaskNode>();
+                this.TaskList = new ArrayList<>();
             }
         } else {
             if (f.createNewFile()) {
-                this.TaskList = new ArrayList<TaskNode>();
+                this.TaskList = new ArrayList<>();
             } else {
                 System.out.printf("Error");
             }
         }
     }
-    public ArrayList<TaskNode> getTaskList()
-    {
-        return this.TaskList;
-    }
+    
+    @Override
     public void createTask(TaskNode task)
     {
         this.TaskList.add(task);
     }
+    @Override
     public void deleteTask(TaskNode object) throws IllegalArgumentException
     {
         this.TaskList.remove(object);
     }
+    @Override
     public void saveAll() throws IOException {
         boolean flag = false;
         try {
@@ -96,5 +96,20 @@ public class TaskLog implements Serializable  {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+    }
+
+    @Override
+    public TaskNode get(int i) {
+        return this.TaskList.get(i);
+    }
+
+    @Override
+    public int size() {
+       return this.TaskList.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+       return this.TaskList.isEmpty();
     }
 }

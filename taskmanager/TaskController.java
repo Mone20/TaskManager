@@ -7,20 +7,21 @@ package taskmanager;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 /**
  *
  * @author Rodion
  */
 public class TaskController {
-    private TaskLog tl;
+    private Log tl;
     private final View ui;
 TaskController() throws ClassNotFoundException, IOException
 {
     this.tl=new TaskLog();
     ui=new View();
 }
-public TaskLog getLog()
+public Log getLog()
 {
     return tl;
 }
@@ -42,9 +43,9 @@ public void mainView()
     public void deleteTask() throws IOException
     {
         int index=ui.viewForDelete();
-        if(tl.getTaskList().size()>index&&index>=0)
+        if(tl.size()>index&&index>=0)
         {
-            this.tl.deleteTask(tl.getTaskList().get(index));
+            this.tl.deleteTask(tl.get(index));
             tl.saveAll();
         }
         else
@@ -52,7 +53,7 @@ public void mainView()
     }
     public void viewAll()
     {
-        if(!this.tl.getTaskList().isEmpty())
+        if(!this.tl.isEmpty())
             ui.viewAllTasks(tl);
             
     }
