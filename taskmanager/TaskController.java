@@ -17,11 +17,13 @@ import org.xml.sax.SAXException;
  */
 public class TaskController {
     private Log tl;
-    private final View ui;
+    private View ui;
+    
 TaskController() throws ClassNotFoundException, IOException, SAXException, ParserConfigurationException, ParseException
 {
     this.tl=new TaskLog();
-    ui=new View();
+    this.ui=new View();
+    
 }
 public Log getLog()
 {
@@ -29,12 +31,10 @@ public Log getLog()
 }
 public void mainView()
 {
-    this.ui.mainView();
-            
+    ui.mainView();
 }
-    public  void createTask() throws IOException, ParseException
+    public  void createTask(TaskNode newTask) throws IOException, ParseException
     {
-        TaskNode newTask=ui.viewForNewTask();
         if(!newTask.getTaskName().isEmpty()&&!newTask.getTaskDescription().isEmpty()&&!newTask.getPhoneNumber().isEmpty())
         {
         tl.createTask(newTask);
@@ -42,9 +42,9 @@ public void mainView()
         }
         
     }
-    public void deleteTask() throws IOException
+    public void deleteTask(int index) throws IOException
     {
-        int index=ui.viewForDelete();
+        
         if(tl.size()>index&&index>=0)
         {
             this.tl.deleteTask(tl.get(index));

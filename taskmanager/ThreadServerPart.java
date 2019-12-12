@@ -9,13 +9,12 @@ package taskmanager;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
 import static taskmanager.Server.SOCKET_CLOSE;
 
 /**
@@ -24,11 +23,15 @@ import static taskmanager.Server.SOCKET_CLOSE;
  */
 public class ThreadServerPart extends Thread {
 private final Socket clientSocket;
-private final TaskController controller;
-public ThreadServerPart(Socket s,TaskController c)
+private static final int CREATE=0;
+private static final int DELETE=1;
+private static final int CREATE_SUCCEFUL=0;
+private static final int DELETE_SUCCEFUL=0;
+public ThreadServerPart(Socket s)
      {
          this.clientSocket=s;
-         this.controller=c;
+         
+        
      }
     @Override
     public void run() 
@@ -39,30 +42,43 @@ public ThreadServerPart(Socket s,TaskController c)
                     in = new  DataInputStream(clientSocket.getInputStream());
                     out = new DataOutputStream(clientSocket.getOutputStream());
                     System.out.println("Server reading from channel");
-                    int numOfTask=0;
-                    int isNotification=0;
+                    int numOfTask;
+                    int action=in.read();
                   
-               while (numOfTask!=Server.EXIT)
-                       {
+             if(action==DELETE)
+              {
+                 
                     numOfTask=in.read();
-                    System.out.println("READ from Log - Task№"+numOfTask);
-                    System.out.println("Server try writing to channel");
-                    ObjectOutputStream objectOut = new ObjectOutputStream(out);
-                        
-                    objectOut.writeObject(controller.getLog().get(numOfTask));
-                    out.flush();
-                    out.write(isNotification);
-                    out.flush();
+                    System.out.println("DELETE from Log - Task№"+numOfTask);
+                    Server.controller.deleteTask(numOfTask);
+                    out.write(DELETE_SUCCEFUL);
                     
-                       }
+              }
+             if(action==CREATE)
+             {
+                 System.out.println("CREATE new Task in Log");
+                 ObjectInputStream objectIn = new ObjectInputStream(in);
+                 TaskNode newTask= (TaskNode)objectIn.readObject();
+                 Server.controller.createTask(newTask);
+                 out.write(CREATE_SUCCEFUL);
+             }
+                   
+                    
+                    if(action==Server.EXIT)
+                    {
                     out.writeInt(SOCKET_CLOSE);
                     System.out.println("client closed");
                     clientSocket.close();
                     in.close();
                     out.close();
+                    }
                     } catch (IOException ex) {
                             Logger.getLogger(ThreadServerPart.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        } catch (ClassNotFoundException ex) {
+        Logger.getLogger(ThreadServerPart.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ParseException ex) {
+        Logger.getLogger(ThreadServerPart.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
     
 

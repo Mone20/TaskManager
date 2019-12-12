@@ -42,7 +42,7 @@ public class Server {
                   { 
                     controller.notification();
                     clientSocket = server.accept(); 
-                    ThreadServerPart serverPart=new ThreadServerPart(clientSocket,NOT_NOTIFICATION);
+                    ThreadServerPart serverPart=new ThreadServerPart(clientSocket);
                     serverPart.start();
               }
             
