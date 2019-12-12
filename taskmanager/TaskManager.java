@@ -9,6 +9,11 @@ package taskmanager;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
+import
+import org.xml.sax.SAXException;
+import userview.UserInterface;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  *
@@ -18,11 +23,11 @@ public class TaskManager implements Serializable {
 
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.text.ParseException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws ParseException
      */
-    public static void main(String[] args) throws IOException, ClassNotFoundException, ParseException, InterruptedException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, ParseException, InterruptedException, ParserConfigurationException, SAXException {
         // TODO code application logic here
         UserInterface TaskManager=new UserInterface();
         TaskManager.mainUserInterface();

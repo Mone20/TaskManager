@@ -1,6 +1,6 @@
-package taskmanager;
+package userview;
 
-import taskmanager.TaskLog;
+import taskmanager.Log;
 import taskmanager.TaskNode;
 import java.io.IOException;
 import java.io.Serializable;
@@ -32,15 +32,14 @@ public View()
         System.out.println(" | NEW TASK   ");
 
         System.out.print(" | Событие: ");
-        taskName = in.nextLine(); // надо
+        taskName = in.nextLine();
 
         System.out.print(" | Описание: ");
-        taskDescription = in.nextLine(); // надо
+        taskDescription = in.nextLine(); 
 
         System.out.print(" |Номер телефона: ");
         phoneNumber = in.nextLine();
 
-        //проверки на ввод даты?
         System.out.println(" | Год:");
         years = in.nextInt();
         System.out.println(" | Месяц:");
