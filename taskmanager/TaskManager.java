@@ -9,7 +9,6 @@ package taskmanager;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
-import
 import org.xml.sax.SAXException;
 import userview.UserInterface;
 
