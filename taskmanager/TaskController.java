@@ -8,6 +8,8 @@ package taskmanager;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 public class TaskController {
     private Log tl;
     private final View ui;
-TaskController() throws ClassNotFoundException, IOException
+TaskController() throws ClassNotFoundException, IOException, SAXException, ParserConfigurationException, ParseException
 {
     this.tl=new TaskLog();
     ui=new View();
