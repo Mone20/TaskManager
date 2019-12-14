@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
+import userview.View;
 
 /**
  *
