@@ -20,7 +20,7 @@ public class TaskController {
     private Log tl;
     private View ui;
     
-TaskController() throws ClassNotFoundException, IOException, SAXException, ParserConfigurationException, ParseException
+public TaskController() throws ClassNotFoundException, IOException, SAXException, ParserConfigurationException, ParseException
 {
     this.tl=new TaskLog();
     this.ui=new View();
