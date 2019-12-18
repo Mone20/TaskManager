@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
 public class Client {
     public static void main(String[] args) throws InterruptedException{
         try (Socket socket = new Socket("localhose", 4004)) {
-           // Socket client = Server.accept(); // присоединие????
+            //Socket client = Server.accept(); // присоединие????
             System.out.println("Connection accepted");
             DataOutputStream out = new DataOutputStream(client.getOutputStream());
             System.out.println("DataOutputStream created");
