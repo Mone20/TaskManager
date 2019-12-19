@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
-import userview.View;
 
 /**
  *
@@ -28,31 +27,37 @@ public TaskController() throws ClassNotFoundException, IOException, SAXException
 }
 public Log getLog()
 {
+    
     return tl;
+   
 }
 public void mainView()
 {
     ui.mainView();
 }
-    public  void createTask(TaskNode newTask) throws IOException, ParseException
+    public  boolean createTask(TaskNode newTask) throws IOException, ParseException
     {
         if(!newTask.getTaskName().isEmpty()&&!newTask.getTaskDescription().isEmpty()&&!newTask.getPhoneNumber().isEmpty())
         {
         tl.createTask(newTask);
         tl.saveAll();
+        return true;
         }
+        else
+            return false;
         
     }
-    public void deleteTask(int index) throws IOException
+    public boolean deleteTask(int index) throws IOException
     {
         
         if(tl.size()>index&&index>=0)
         {
             this.tl.deleteTask(tl.get(index));
             tl.saveAll();
+            return true;
         }
         else
-            System.out.println("task dosnt exist");
+           return false;
     }
     public void viewAll()
     {

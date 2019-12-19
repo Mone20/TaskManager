@@ -7,7 +7,7 @@ import java.util.*;
 
 public class TimeNotification {
     private Log<TaskNode> temp;
-
+    
     public TimeNotification(Log tl) throws IOException, ClassNotFoundException {
         temp=tl;
     }
@@ -37,10 +37,9 @@ public class TimeNotification {
         }
         @Override
         public void run() {
-            System.out.println("TASK NOTIFICATION");
-            System.out.println("НАЗВАНИЕ:"+this.notificationTask.getTaskName());
-             System.out.println("ОПИСАНИЕ:"+this.notificationTask.getTaskDescription());
-              System.out.println("НОМЕР:"+this.notificationTask.getPhoneNumber());
+            
+//            ThreadServerPart serverPart=new ThreadServerPart(Server.clientSocket);
+//            serverPart.start();
                
         }
     }
