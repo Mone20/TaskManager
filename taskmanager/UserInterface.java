@@ -30,13 +30,12 @@ public class UserInterface  implements Serializable {
         
         while (true){
             
-            tc.notification();
             tc.mainView();
             choice = in.nextInt();
             switch (choice){
                 case 1:{
                    tc.clear();
-                   tc.createTask(); 
+//                   tc.createTask();
                  
                     break;
                 }
@@ -47,7 +46,7 @@ public class UserInterface  implements Serializable {
                 }
                 case 3:{
                     tc.clear();
-                    tc.deleteTask();
+//                    tc.deleteTask();
                    
                     break;
                 }

@@ -15,44 +15,42 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import taskmanager.Message;
 import taskmanager.server.ThreadServerPart;
 
 /**
- *
  * @author Rodion
  */
 public class DeleteWindow extends JFrame {
-    public DeleteWindow()
-    {
+    public DeleteWindow() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         JTextField smallField = new JTextField(15);
         JButton deleteButton = new JButton("Удалить");
-       
+
         deleteButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-    
-      ObjectOutputStream objectOutput;          
-      try {
-                 objectOutput=new ObjectOutputStream(Client.out);
-                 
-                 objectOutput.writeObject(new Message(Integer.valueOf(smallField.getText()),"DELETE"));
-                 objectOutput.flush();
-                
-                 int mes=Client.in.readInt();
-                 if(mes==Client.DELETE_SUCCEFUL)
-                 {
-                     JOptionPane.showMessageDialog(DeleteWindow.this, 
-                 "Событие удалено!");
-                 }
-                 else
-                  JOptionPane.showMessageDialog(DeleteWindow.this, 
-                 "Ошибка удаления события");
-                  dispose();
-                 } catch (IOException ex) {}
+
+
+                ObjectOutputStream objectOutput;
+                try {
+                    objectOutput = new ObjectOutputStream(Client.out);
+
+                    objectOutput.writeObject(new Message(Integer.valueOf(smallField.getText()), "DELETE"));
+                    objectOutput.flush();
+
+                    int mes = Client.in.readInt();
+                    if (mes == Client.DELETE_SUCCEFUL) {
+                        JOptionPane.showMessageDialog(DeleteWindow.this,
+                                "Событие удалено!");
+                    } else
+                        JOptionPane.showMessageDialog(DeleteWindow.this,
+                                "Ошибка удаления события");
+                    dispose();
+                } catch (IOException ex) {
+                }
             }
         });
         JPanel contents = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -63,5 +61,5 @@ public class DeleteWindow extends JFrame {
         setSize(200, 150);
         setVisible(true);
     }
-    
+
 }
